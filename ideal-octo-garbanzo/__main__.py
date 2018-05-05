@@ -50,6 +50,15 @@ async def issue_comment_created_event(event, gh, *args, **kwargs):
                   accept='application/vnd.github.squirrel-girl-preview+json')
 
 
+@router.register('pull_request', action='opened')
+async def pull_request_opened_event(event, gh, *args, **kwargs):
+    """Whenever a pull request is opened, give it the "Review Ready" label."""
+    url = event.data['pull_request']['url']
+    label_objects = await gh.get(url)['labels']
+    labels = [label['name'] for label in label_objects] + ['Review Ready']
+    await gh.patch(url, data={'labels': labels})
+
+
 async def main(request):
     body = await request.read()
     secret = os.environ.get('GH_SECRET')
