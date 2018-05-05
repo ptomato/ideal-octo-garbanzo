@@ -54,8 +54,9 @@ async def issue_comment_created_event(event, gh, *args, **kwargs):
 async def pull_request_opened_event(event, gh, *args, **kwargs):
     """Whenever a pull request is opened, give it the "Review Ready" label."""
     url = event.data['pull_request']['url']
-    label_objects = await gh.getitem(url)['labels']
-    labels = [label['name'] for label in label_objects] + ['Review Ready']
+    pull_request = await gh.getitem(url)
+    labels = [label['name'] for label in pull_request['labels']]
+    labels += ['Review Ready']
     await gh.patch(url, data={'labels': labels})
 
 
