@@ -15,7 +15,7 @@ async def issue_opened_event(event, gh, *args, **kwargs):
     message = f"""Thanks for the report @{author}! :tada: A maintainer will be
 along soon to take a look.
 
-:donut: We appreciate your taking the time to file a bug report. :donut:
+:doughnut: We appreciate your taking the time to file a bug report. :doughnut:
 
 —Sincerely, ideal-:octocat:-garbanzo the Bot"""
     await gh.post(url, data={'body': message})
