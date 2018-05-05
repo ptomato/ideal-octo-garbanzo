@@ -21,7 +21,7 @@ along soon to take a look.
     await gh.post(url, data={'body': message})
 
 
-@router.register('pull_requests', action='closed')
+@router.register('pull_request', action='closed')
 async def pull_request_closed_event(event, gh, *args, **kwargs):
     """Whenever a pull request is merged, thank the author."""
     merged = event.data['pull_request']['merged']
