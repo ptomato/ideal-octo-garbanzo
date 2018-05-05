@@ -38,6 +38,18 @@ when people help make {repo} better. :sushi:
     await gh.post(url, data={'body': message})
 
 
+@router.register('issue_comment', action='created')
+async def issue_comment_created_event(event, gh, *args, **kwargs):
+    """Whenever ptomato comments, give him a thumbs up."""
+    user = event.data['comment']['user']['login']
+    if user != 'ptomato':
+        return
+
+    url = event.data['comment']['url'] + '/reactions'
+    await gh.post(url, data={'content': 'heart'},
+                  accept='application/vnd.github.squirrel-girl-preview+json')
+
+
 async def main(request):
     body = await request.read()
     secret = os.environ.get('GH_SECRET')
