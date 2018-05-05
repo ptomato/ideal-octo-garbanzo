@@ -13,11 +13,11 @@ async def issue_opened_event(event, gh, *args, **kwargs):
     url = event.data['issue']['comments_url']
     author = event.data['issue']['user']['login']
     message = f"""Thanks for the report @{author}! :tada: A maintainer will be
-    along soon to take a look.
+along soon to take a look.
 
-    :donut: We appreciate your taking the time to file a bug report. :donut:
+:donut: We appreciate your taking the time to file a bug report. :donut:
 
-    —Sincerely, ideal-:octocat:-garbanzo the Bot"""
+—Sincerely, ideal-:octocat:-garbanzo the Bot"""
     await gh.post(url, data={'body': message})
 
 
