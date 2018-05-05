@@ -32,7 +32,7 @@ async def pull_request_closed_event(event, gh, *args, **kwargs):
     author = event.data['pull_request']['user']['login']
     repo = event.data['pull_request']['base']['repo']['full_name']
     message = f""":pizza: Thanks for all the hard work, @{author}! We love it
-when people help make @{repo} better. :sushi:
+when people help make {repo} better. :sushi:
 
 —Sincerely, ideal-:octocat:-garbanzo the Bot"""
     await gh.post(url, data={'body': message})
