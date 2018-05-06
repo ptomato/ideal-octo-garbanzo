@@ -53,7 +53,7 @@ async def issue_comment_created_event(event, gh, *args, **kwargs):
 @router.register('pull_request', action='opened')
 async def pull_request_opened_event(event, gh, *args, **kwargs):
     """Whenever a pull request is opened, give it the "Review Ready" label."""
-    url = event.data['pull_request']['url'] + '/labels'
+    url = event.data['pull_request']['issue_url'] + '/labels'
     await gh.post(url, data=['Review Ready'])
 
 
